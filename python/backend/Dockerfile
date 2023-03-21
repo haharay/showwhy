@@ -38,8 +38,22 @@ COPY ./poetry.lock .
 COPY ./pyproject.toml .
 
 # Install python denpendencies
+# echo "Installing common dependencies..."
 RUN poetry config virtualenvs.create false \
-    && ./scripts/install_python_deps.sh
+    && poetry install --no-interaction --no-ansi --only main,dev \
+    && rm -rf .cache
+# echo "Installing discover dependencies..."
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --only discover \
+    && rm -rf .cache
+#echo "Installing events dependencies..."
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --only events \
+    && rm -rf .cache
+#echo "Installing exposure dependencies..."
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --only exposure \
+    && rm -rf .cache
 
 # Copy remaining files
 COPY . .
