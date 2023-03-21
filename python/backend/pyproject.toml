@@ -99,3 +99,9 @@ profile = 'black'
 multi_line_output = 3
 line_length = 120
 py_version = 38
+
+#设置poetry包管理工具的自定义pypi镜像源配置
+[[tool.poetry.source]]
+name = "aliyun"
+url = "http://mirrors.aliyun.com/pypi/simple"
+default = true
