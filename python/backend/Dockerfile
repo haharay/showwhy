@@ -38,6 +38,7 @@ COPY ./poetry.lock .
 COPY ./pyproject.toml .
 
 # Install python denpendencies
+RUN poetry lock [--no-update]
 RUN poetry config virtualenvs.create false \
     && ./scripts/install_python_deps.sh
 
